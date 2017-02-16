@@ -6,10 +6,13 @@ const {View, StyleSheet, } = ReactNative;
 const StaticContainer = require('react-native/Libraries/Components/StaticContainer');
 
 const SceneComponent = (Props) => {
-  const {shouldUpdated, ...props, } = Props;
+  const {shouldUpdated, ...props} = Props;
   return <View {...props}>
-      <StaticContainer shouldUpdate={shouldUpdated}>
-        {props.children}
+      <StaticContainer shouldUpdate={shouldUpdated} >
+        {React.cloneElement(
+          React.Children.only(props.children),
+          props.tabContentProps
+        )}
       </StaticContainer>
   </View>;
 };
